@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>photos</title>
+</head>
+<body>
+
+    <style>
+        img {
+    width: 395px;
+    height: 312px;
+    object-fit: cover;
+    margin: auto;
+    display: block;
+}
+
+body {
+    background: beige;
+}
+    </style>
+
+
+ 
+    <%if(locals.fileName){ %>
+
+
+<div class="mainDiv">
+    <div class="container">
+
+        <%if(locals.path==='image/png' ||locals.path==='image/jpeg' ||locals.path==='image/jpg'   ){ %>
+            <div class="photosMain">
+                <img src="./upload/<%=fileName%>" alt="">
+            </div>
+        <%}else if(locals.path==='video/mp4'){ %>
+            <div class="videosMain">
+                <video width="320" height="240" controls>
+                    <source src="./upload/<%=fileName%>" type="video/mp4">
+                  </video>
+            </div>
+            <%}else{%>
+
+                <div class="pdfMain">
+<h1>hello i am pdf reader</h1>
+                </div>
+
+     <%}%>
+
+
+     
+    </div>
+</div>
+
+
+<%}%>
+
+
+
+
+
+</body>
+</html>
