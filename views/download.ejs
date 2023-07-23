@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Shere</title>
+</head>
+<body class="bg-indigo-200">
+<style>
+
+    .mainDiv {
+        width: 400px;
+    margin: auto;
+    margin-top: 49px;
+    padding: 23px;
+    border-radius: 9px;
+    outline: none;
+}
+input.bg-indigo-700.p-2.text-white.rounded-md.cursor-pointer.w-2\/3.m-auto.block {
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.Linkdiv.bg-purple-600.rounded-full {
+    padding: 11px;
+}
+.Linkdiv.bg-indigo-600.rounded-full {
+    padding: 11px;
+}
+.flex.slink {
+    display: block;
+    margin-top: 30px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+a.p-2.text-white.Linkdiv.rounded-full.bg-indigo-600 {
+    padding:  10px 36px;
+}
+
+a.Linkdiv.bg-sky-600.rounded-full.p-2.text-white {
+    padding: 10px 36px;
+}
+
+
+.flex.items-center.space-x-6.m-auto {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+img.h-16.w-16.object-cover.rounded-full {
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 19px;
+    /* margin-bottom: 27px; */
+}
+
+.shrink-0 {
+    width: 90px;
+    margin: auto;
+}
+</style>
+
+ 
+<div class="mainDiv bg-slate-100  shadow-xl">
+    <form class="text-center m-auto  items-center space-x-6" enctype="multipart/form-data" action="/upload" method="post">
+      <div class="flex  items-center space-x-6  m-auto ">
+        <div class="shrink-0">
+          <img style="padding: 10px" class="shadow-lg border-dashed  border-2 border-stone-600 h-16 w-16 object-cover rounded-full" src="https://cdn-icons-png.flaticon.com/512/6386/6386976.png" alt="Current profile photo" />
+   
+        </div>
+
+      
+
+      </div>
+      <%if(locals.fileName){%>
+    
+        <span class="text-black font-bold">Download Now  : 
+        </span><p><%=locals.fileName%></p>
+       
+        <%}%>
+      
+       <div class="flex slink  ">
+    
+          
+        <a class="Linkdiv shadow-xl bg-sky-600	rounded-full p-2 text-white" href="/download/<%=locals.fileName%>">Download </a>
+   
+
+ 
+     </div>
+      </form>
+
+</div>
+
+</body>
+</html>

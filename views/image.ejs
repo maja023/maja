@@ -12,28 +12,17 @@
     
       
         <div class="videosMain">
-                <video width="320" height="240" controls>
-                    <source src="/./upload/<%=image%>" type="video/mp4">
-                  </video>
+            <img src="/./upload/images/<%=locals.image%>" alt="">
+        
             </div>
 
-    <%}%>
+    <%}else{%>
+        <h1>Not Found</h1>
+        
+        <%}%>
 
         
-        
+     
 
-
-
-
-
-
-
-
-
-
-
-<h4>cannot find image</h4>
-
-    <%}%>
 </body>
 </html>
