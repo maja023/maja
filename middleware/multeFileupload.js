@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     },
     filename:  (req, file, cb)=> {
         const fileEx=path.extname(file.originalname);
-        const fileNamecreate=file.originalname.replace(fileEx,"").toLowerCase()+"-"+Date.now()+fileEx;
+        const fileNamecreate="maja"+"-"+Date.now()+fileEx;
       
       cb(null, fileNamecreate)
     }

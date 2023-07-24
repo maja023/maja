@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Shere</title>
 </head>
@@ -63,31 +64,93 @@ img.h-16.w-16.object-cover.rounded-full {
     width: 90px;
     margin: auto;
 }
+
+p.expire {
+   
+    /* border-bottom: 1px solid #80808059; */
+    padding: 7px 0px;
+    /* width: 123px; */
+    /* margin: auto; */
+    /* display: block; */
+    /* text-align: center; */
+}
+
+small.fileSize {
+
+    font-weight: bold;
+}
+
+.fileName {
+    font-style: italic;
+    font-family: revert;
+}
+p.fileName {
+    padding-bottom: 10px;
+}
+
+
+p.expire {
+    color: #7d8083;
+}
+
+p.fileName {
+    font-weight: bold;
+}
+
+p.fileName {
+    color: dodgerblue;
+}
+
+small.fileSize {
+    color: #6b7a6f;
+}
+
+
+.dImg {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    margin-bottom: 11px;
+}
+
+.dIcon {
+    width: 100%;
+    height: 100%;
+    font-size: 35px;
+    padding: 10px;
+
+}
 </style>
 
  
 <div class="mainDiv bg-slate-100  shadow-xl">
     <form class="text-center m-auto  items-center space-x-6" enctype="multipart/form-data" action="/upload" method="post">
       <div class="flex  items-center space-x-6  m-auto ">
-        <div class="shrink-0">
-          <img style="padding: 10px" class="shadow-lg border-dashed  border-2 border-stone-600 h-16 w-16 object-cover rounded-full" src="https://cdn-icons-png.flaticon.com/512/6386/6386976.png" alt="Current profile photo" />
-   
-        </div>
+    
+
+            <div class="dImg ">
+                <i class="dIcon fa-solid fa-file-arrow-down rounded-full border-2 border-stone-600  border-dashed"></i>
+                  
+            </div>
+            
+         
+        
 
       
 
       </div>
       <%if(locals.fileName){%>
     
-        <span class="text-black font-bold">Download Now  : 
-        </span><p><%=locals.fileName%></p>
-       
+        <span class="text-black font-bold">Your Download File Ready : </span>
+            <p class="expire">Expire 24 hours</p>
+        <p class="fileName"><%=locals.fileName%></p>
+       <small class="fileSize">300 kb</small>
         <%}%>
       
        <div class="flex slink  ">
     
           
-        <a class="Linkdiv shadow-xl bg-sky-600	rounded-full p-2 text-white" href="/download/<%=locals.fileName%>">Download </a>
+        <a class="Linkdiv shadow-xl bg-sky-600	rounded-full p-2 text-white" href="/download/<%=locals.fileName%>">Download  File</a>
    
 
  

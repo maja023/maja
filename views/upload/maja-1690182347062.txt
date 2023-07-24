@@ -1,0 +1,60 @@
+<html><head>
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/Themes/Store/css/theme.css">
+  <link rel="stylesheet" type="text/css" href="/Themes/Store/css/style.css">
+  <script type="text/javascript">
+    function getQuerystringByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search.toLowerCase());
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+  </script>
+  <style>
+    input, textarea {width:100%;}
+    .col-xs-6:nth-of-type(2n), .col-sm-6:nth-of-type(2n){margin-bottom:0;}
+    .row{margin-right:0;}
+  </style>
+  </head>
+  <body style="background-color:#fff;">
+    <form action="/store/EmailFormProcessor.aspx" target="_top" method="post">
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="hidden" name="hidSendTo" value="developername">
+          <input type="text" placeholder="offer price" style="border:1px solid #ccc;margin:4px 0;" name="OfferPrice" id="OfferPrice">
+          <input type="text" name="CurrentPrice13" value="price">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <input type="text" placeholder="name" style="border:1px solid #ccc;margin:4px 0;" name="Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" placeholder="email" style="border:1px solid #ccc;margin:4px 0;" name="email">
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <input class="ProductDetailsAddToCartButton ThemeButton AddToCartThemeButton ProductDetailsAddToCartThemeButton btn btn-primary" type="submit" style="width:100%;font-size:28px;text-transform:capitalize;margin-top:1px;" value="submit">
+        </div>
+      </div>
+      <script>
+        var item_number = getQuerystringByName('item');
+
+        if(item_number.length > 0){
+          var item_number_input = document.getElementById('item_number');
+          item_number_input.setAttribute('value', item_number);
+        }
+
+        var offer = getQuerystringByName('offer');
+
+        if(offer.length > 0){
+          var offer_input = document.getElementById('OfferPrice');
+          offer_input.setAttribute('placeHolder', 'offer: ' + offer);
+        }
+
+      </script>
+    </form>
+  </body></html>
