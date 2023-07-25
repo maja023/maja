@@ -1,12 +1,37 @@
+const majashereModel=require("../model/fileshereModel");
 
 const getFileController=(req,res)=>{
     res.render('index')
+
+
  }
 
-const getFileUploadController=(req,res)=>{
-res.render("index",{
-    fileName:req.file.filename
-  })
+const getFileUploadController=async(req,res)=>{
+    const file=req.file;
+
+    const dat=new Date();
+const wpassCheck=req.body.wpass !==""?req.body.wpass:"null";
+
+        const fileUpquery=new majashereModel({
+        fileOrginalName:file.originalname,
+        filePassword:wpassCheck,
+        fileReplaceName:file.filename,
+        fileSize:file.size,
+        filePath:file.path,
+        fileUploadTime:dat.toLocaleTimeString("en-US",{timeZone:'asia/dhaka'}) + " - " + dat.toLocaleDateString("en-US",{timeZone:'asia/dhaka'})
+    });
+
+    const fileUploaddatasave=await fileUpquery.save();
+    if(fileUploaddatasave){
+        res.render("index",{
+            fileName:req.file.filename
+          })
+    }else{
+        res.send("not Uplod")
+
+    }
+ 
+
 }
 
 
@@ -18,23 +43,62 @@ res.render("image",{
 } 
 
 
-const downloadController=(req,res)=>{
+const getDownloadpageController=async(req,res)=>{
+    const fileId=req.params.fileid;
+    const fileFindquery=await majashereModel.findOne({fileReplaceName:fileId});
+    if(fileFindquery && fileFindquery.filePassword!=="null"){
+        res.render("download",{
+            fileName:fileFindquery.fileOrginalName,
+            filePass:fileFindquery.filePassword,
+            filereplaceName:fileFindquery.fileReplaceName,
+            fileSize:fileFindquery.fileSize,
+            filePath:fileFindquery.filePath,
+        })
+    }else if(fileFindquery){
+        res.render("download",{
+            fileName:fileFindquery.fileOrginalName,
+            filereplaceName:fileFindquery.fileReplaceName,
+            fileSize:fileFindquery.fileSize,
+            filePath:fileFindquery.filePath,
+        })
+
+    }else{
+        res.send("dawload Error")
+    }
+} 
+
+const getDownloadController=async(req,res)=>{
     try {
-        const fDest=req.params.id;
-        res.download(`./views/upload/${fDest}`)
+        const fileID=req.params.fileid;
+        const wpassverify=req.body.wpassverify;
+     
+        const downFind=await majashereModel.findOne({fileReplaceName:fileID})
+        if(downFind.filePassword!="null"){
+            if(downFind.filePassword==wpassverify){
+                res.download(downFind.filePath)
+            }else{
+                res.render("download",{
+                    fileName:downFind.fileOrginalName,
+                    fileInMessage:"incorrect Password",
+                    filePass:downFind.filePassword,
+                    filereplaceName:downFind.fileReplaceName,
+                    fileSize:downFind.fileSize,
+                    filePath:downFind.filePath,
+                })
+                
+            }
+        }else{
+            res.download(downFind.filePath)
+        }
+        
+
     } catch (error) {
+        
         res.send(error)
     }
-} 
+}
 
-const getDownloadController=(req,res)=>{
-    if(req.params.fileName){
-        res.render("download",{
-            fileName:req.params.fileName
-        })
-    }else{
-    res.redirect('/')
-    }
-} 
 
-module.exports={getFileController,getFileUploadController,getFileDownloadController,downloadController,getDownloadController}
+
+
+module.exports={getFileController,getFileUploadController,getFileDownloadController,getDownloadpageController,getDownloadController}

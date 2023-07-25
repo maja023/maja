@@ -1,7 +1,7 @@
 const multer=require("multer");
 const upload_path="./views/upload";
 const path=require("path")
-
+const randomString=require("randomstring");
 const storage = multer.diskStorage({
     destination:  (req, file, cb)=> {
        
@@ -10,8 +10,7 @@ const storage = multer.diskStorage({
     },
     filename:  (req, file, cb)=> {
         const fileEx=path.extname(file.originalname);
-        const fileNamecreate="maja"+"-"+Date.now()+fileEx;
-      
+        const fileNamecreate=randomString.generate(15)+fileEx;
       cb(null, fileNamecreate)
     }
   });

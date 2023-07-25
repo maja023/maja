@@ -88,6 +88,7 @@ button.LinkCopyButton {
     padding: 3px;
     color: white;
     cursor: pointer;
+    transition: all 1s;
     border-radius: 16px;
 }
 .copyIcon {
@@ -110,18 +111,18 @@ input.wpss {
     margin-top: 12px;
     outline: none;
     border-radius: 6px;
-    position: relative;
+  display: none;
     left: 47px;
 }
 
 .wPasCheck {
-    position: relative;
+
     left: -16px;
 }
 
 input.linkIt {
-    font-style: italic;
-    font-family: cursive;
+
+    font-family: sans-serif;
     padding-left: 18px;
 }
 
@@ -136,6 +137,7 @@ button.LinkCopyButton:active:before {
     padding: 6px 18px;
     border-radius: 12px;
     left: -11px;
+    transition: all 1s;
     cursor: pointer;
     box-shadow: 1px 2px 11px #ababab;
 }
@@ -144,6 +146,14 @@ button.LinkCopyButton:hover {
     background: black;
     color: white;
     box-shadow: 2px 4px 4px #b3afaf;
+}
+
+input.wpss {
+    width: 49%;
+    margin-top: 10px;
+    margin: auto;
+
+    /* text-align: center; */
 }
 </style>
 
@@ -166,14 +176,16 @@ button.LinkCopyButton:hover {
           "/>
         </label>
       </div>
-      <%if(!locals.fileName){%>
+ 
+        <div class="wPwraper">
       <label>
         <input type="checkbox"  class="accent-pink-500 wPasCheck " > With Password
-        
       </label>
-      <input type="text" class="wpss"  placeholder="Enter Password" style="display: none;">
+        <input type="text" class="wpss" name="wpass"  placeholder="Enter Password" >
+      </div>
+     
 
-      <%}%>
+ 
 
        <input  type="submit" class="text-white p-2 upload bg-indigo-700 p-2 text-white rounded-md cursor-pointer w-2/3 m-auto block" value="Upload" >
       </form>
@@ -184,7 +196,7 @@ button.LinkCopyButton:hover {
         <small>Expire 24h</small>
       <div class="linkmain pointer">
         <input disabled type="text"  class="linkIt" value="<%=locals.fileName%>"></input>
-        <input hidden type="text" id="myInput" class="linkIt" value="http://localhost:4002/show/views/upload/<%=locals.fileName%>"></input>
+        <input hidden type="text" id="myInput" class="linkIt" value="http://localhost:4002/download/<%=locals.fileName%>"></input>
         <button active  onclick="myFunction()"  class="LinkCopyButton "><i class="pointer copyIcon fa-regular fa-copy"></i></button>
       </div>
       <div class="flex slink  ">
@@ -204,8 +216,10 @@ document.querySelector(".wPasCheck").addEventListener("click",function(){
 
   if(wPasCheck==true){
     x.style.display = "block";
+  
   }else{
     x.style.display = "none";
+    x.value=""
   }
 
 });

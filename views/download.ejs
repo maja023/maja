@@ -105,7 +105,9 @@ small.fileSize {
     color: #6b7a6f;
 }
 
-
+button.Linkdiv.shadow-xl.bg-sky-600.rounded-full.p-2.text-white {
+    padding: 9px 33px;
+}
 .dImg {
     width: 60px;
     height: 60px;
@@ -124,7 +126,7 @@ small.fileSize {
 
  
 <div class="mainDiv bg-slate-100  shadow-xl">
-    <form class="text-center m-auto  items-center space-x-6" enctype="multipart/form-data" action="/upload" method="post">
+    <form class="text-center m-auto  items-center space-x-6" action="/download-start/<%=locals.filereplaceName%>" method="post">
       <div class="flex  items-center space-x-6  m-auto ">
     
 
@@ -144,13 +146,18 @@ small.fileSize {
         <span class="text-black font-bold">Your Download File Ready : </span>
             <p class="expire">Expire 24 hours</p>
         <p class="fileName"><%=locals.fileName%></p>
-       <small class="fileSize">300 kb</small>
+       <small style="display: block;" class="fileSize"><%=parseInt((locals.fileSize)/1000)%>kb</small>
         <%}%>
-      
+        <%if(locals.filePass){%>
+            <input type="password" class="wpss border-2 rounded-full shadow-lg border-black p-2 my-2" name="wpassverify"  placeholder="Enter Password" >
+            <%if(locals.filePass){%>
+                <p style="color: red;"><%=locals.fileInMessage%></p>
+                <%}%>
+            <%}%>
        <div class="flex slink  ">
     
           
-        <a class="Linkdiv shadow-xl bg-sky-600	rounded-full p-2 text-white" href="/download/<%=locals.fileName%>">Download  File</a>
+<button id="dButton" class="Linkdiv shadow-xl bg-sky-600	rounded-full p-2 text-white">Download File</button>
    
 
  
@@ -158,6 +165,5 @@ small.fileSize {
       </form>
 
 </div>
-
 </body>
 </html>

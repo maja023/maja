@@ -1,5 +1,12 @@
 const express=require('express');
 const app=express();
+//Experess Rate limiter setup
+const limit=require("express-rate-limit");
+const limiter=limit({
+    windowMs:5000,
+    max:30
+})
+app.use(limiter)
 //dot env setup
 require("dotenv").config();
 const port=process.env.PORT;
@@ -10,7 +17,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(express.static('views'))
 app.use(express.static('public'))
-
+require("./confid/db")
 //import router 
 const {shereRoute}=require('./router/fileshereRoute');
 app.use(shereRoute)
